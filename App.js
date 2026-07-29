@@ -12,11 +12,47 @@
  */
 
 import React from 'react';
+
+import { useFonts } from 'expo-font';
+
+import {
+  PlayfairDisplay_700Bold,
+  PlayfairDisplay_600SemiBold,
+} from '@expo-google-fonts/playfair-display';
+
+import {
+  Lato_400Regular,
+  Lato_400Regular_Italic,
+} from '@expo-google-fonts/lato';
+
+
+import {
+  Nunito_400Regular,
+  Nunito_600SemiBold,
+  Nunito_700Bold,
+} from '@expo-google-fonts/nunito';
+
 import BottomTabs from './navigation/BottomTabs';
 
 /**
  * Componente principal de la aplicación.
  */
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    PlayfairDisplay_700Bold,
+    PlayfairDisplay_600SemiBold,
+    Lato_400Regular,
+    Lato_400Regular_Italic,
+    Nunito_400Regular,
+    Nunito_600SemiBold,
+    Nunito_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return <BottomTabs />;
+
 }
