@@ -19,7 +19,7 @@ import {
   View,
 } from 'react-native';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
+//import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ParallaxHeader from '../components/common/ParallaxHeader';
 
@@ -39,14 +39,18 @@ import {
 export default function HomeScreen() {
  const scrollY = React.useRef(new Animated.Value(0)).current;
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
 
       {/* Banner principal */}
-      <ParallaxHeader scrollY={scrollY} />
+     <ParallaxHeader scrollY={scrollY} />
 
       {/* Contenido desplazable */}
-      <Animated.ScrollView
-        contentContainerStyle={styles.content}
+       <Animated.ScrollView
+                style={{ flex: 1 }}
+                contentContainerStyle={[
+                styles.content,
+                { paddingBottom: 80 },
+                ]}
         onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { y: scrollY } } }],
             { useNativeDriver: true }
@@ -89,7 +93,7 @@ export default function HomeScreen() {
 
         </Animated.ScrollView>
 
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -101,9 +105,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+    
   },
 
   content: {
+    flexGrow: 1,
     padding: 28,
   },
 
@@ -138,11 +144,11 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     textAlign: 'justify',
     paddingHorizontal: 27,
-    paddingVertical: 7,    
+    paddingVertical: 5,    
     },
 
     note: {
-    marginTop: 30,
+    marginTop: 15,
     fontFamily: 'Lato_400Regular_Italic',
     fontSize: 15,
     textAlign: 'center',

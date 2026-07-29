@@ -13,6 +13,7 @@ const Colors = {
 
   // Fondo principal de la aplicación
   background: '#F3D6F6',
+  //background: 'lime',
 
   // Color principal (uva)
   primary: '#7c3290',
@@ -34,6 +35,12 @@ const Colors = {
 
   // Blanco
   white: '#FFFFFF',
+
+  // Masa de pie
+  pieCrust: '#efa0ff',
+
+  // Íconos inactivos de los tabs
+  pieCrustLight: '#dcafe4',
 
 };
 

@@ -19,6 +19,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/MenuScreen';
+import Colors from '../theme/colors';
 
 // Crea el navegador de pestañas.
 const Tab = createBottomTabNavigator();
@@ -33,6 +34,27 @@ export default function BottomTabs() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
+          tabBarStyle: {
+            backgroundColor: Colors.tertiary,
+            borderTopWidth: 0,
+            elevation: 10,
+            
+            shadowColor: '#000',
+            shadowOpacity: 0.15,
+            height: 125,
+            paddingBottom: 6,
+            paddingTop: 6,
+            },
+
+            tabBarActiveTintColor: Colors.pieCrust,
+
+            tabBarInactiveTintColor: '#ff8787',
+
+            tabBarLabelStyle: {
+            fontSize: 12,
+            fontWeight: '600',
+            //marginBottom: 2,
+            },
 
           // Configuración de los íconos de cada pestaña.
           tabBarIcon: ({ color, size }) => {
