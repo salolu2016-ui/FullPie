@@ -37,10 +37,10 @@ const Colors = {
   white: '#FFFFFF',
 
   // Masa de pie
-  pieCrust: '#efa0ff',
+  pieCrust: '#d333ff',
 
   // Íconos inactivos de los tabs
-  pieCrustLight: '#dcafe4',
+  pieCrustLight: '#b88ac0',
 
 };
 

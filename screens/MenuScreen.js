@@ -14,35 +14,49 @@
  */
 
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 
-/**
- * Componente que representa la pantalla del menú de pies.
- *
- * En esta primera fase únicamente se muestra un texto para
- * validar el funcionamiento de la navegación entre pestañas.
+import {
+  Animated,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import ParallaxHeader from '../components/common/ParallaxHeader';
+
+import Colors from '../theme/colors';
+
+    /**
+ * Pantalla que muestra el catálogo de pies.
  */
 export default function MenuScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Menú de Pies</Text>
-    </View>
-  );
-}
+
+    const scrollY = React.useRef(new Animated.Value(0)).current;
+
+    return (
+        <SafeAreaView
+        style={styles.container}
+        edges={['top']}
+        >
+
+        {/* Banner principal */}
+        <ParallaxHeader scrollY={scrollY} />
+
+        </SafeAreaView>
+    );
+    } 
 
 /**
  * Estilos de la pantalla.
  */
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Colors.background,
   },
 
-  text: {
-    fontSize: 28,
-    fontWeight: 'bold',
-  },
 });

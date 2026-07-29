@@ -13,6 +13,8 @@
 
 import React from 'react';
 
+//import * as NavigationBar from 'expo-navigation-bar';
+
 import { useFonts } from 'expo-font';
 
 import {
@@ -34,10 +36,14 @@ import {
 
 import BottomTabs from './navigation/BottomTabs';
 
+//import * as NavigationBar from 'expo-navigation-bar';
+
 /**
  * Componente principal de la aplicación.
  */
 export default function App() {
+
+
 
   const [fontsLoaded] = useFonts({
     PlayfairDisplay_700Bold,

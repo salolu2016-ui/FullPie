@@ -46,9 +46,9 @@ export default function BottomTabs() {
             paddingTop: 6,
             },
 
-            tabBarActiveTintColor: Colors.pieCrust,
+            tabBarActiveTintColor: '#ff8787',
 
-            tabBarInactiveTintColor: '#ff8787',
+            tabBarInactiveTintColor: Colors.pieCrustLight,
 
             tabBarLabelStyle: {
             fontSize: 12,
