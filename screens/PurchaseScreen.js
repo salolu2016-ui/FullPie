@@ -19,12 +19,14 @@ import {
     TouchableOpacity,
     ScrollView,
     StyleSheet,
+    Alert,
 } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 
 import Colors from '../theme/colors';
+import { saveOrder } from '../services/orderService';
 
 export default function PurchaseScreen({ route }) {
 
@@ -49,6 +51,76 @@ export default function PurchaseScreen({ route }) {
     }, [pie]);
 
     const subtotal = (precio * cantidad).toFixed(2);
+
+        /* ======================================================
+   Confirmar compra.
+   ====================================================== */
+
+const confirmarCompra = async () => {
+
+    if (nombre.trim() === '') {
+
+        Alert.alert(
+            'Nombre requerido',
+            'Ingrese su nombre.'
+        );
+
+        return;
+
+    }
+
+    if (telefono.trim() === '') {
+
+        Alert.alert(
+            'Teléfono requerido',
+            'Ingrese su teléfono.'
+        );
+
+        return;
+
+    }
+
+    try {
+
+        await saveOrder({
+
+            nombre,
+            telefono,
+            pie: pie.nombre,
+            precio,
+            cantidad,
+            subtotal: Number(subtotal),
+
+        });
+
+        Alert.alert(
+
+            'Compra realizada',
+
+            'Su pedido fue registrado correctamente.\n\n¡Gracias por comprar en FullPie! 🥧',
+
+            [
+                {
+                    text: 'Aceptar',
+                    onPress: () => navigation.goBack(),
+                },
+            ]
+
+        );
+
+    } catch (error) {
+
+        Alert.alert(
+
+            'Error',
+
+            'No fue posible registrar el pedido.\nInténtelo nuevamente.'
+
+        );
+
+    }
+
+};
 
     return (
 
@@ -228,6 +300,7 @@ export default function PurchaseScreen({ route }) {
 
                             <TouchableOpacity
                                 style={styles.confirmButton}
+                                onPress={confirmarCompra}
                             >
 
                                 <Text style={styles.confirmButtonText}>
