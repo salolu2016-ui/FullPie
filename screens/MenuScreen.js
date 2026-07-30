@@ -26,8 +26,9 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ParallaxHeader from '../components/common/ParallaxHeader';
-
+import PiePage from '../components/menu/PiePage';
 import Colors from '../theme/colors';
+import pies from '../data/pies';
 
     /**
  * Pantalla que muestra el catálogo de pies.
@@ -44,6 +45,23 @@ export default function MenuScreen() {
 
         {/* Banner principal */}
         <ParallaxHeader scrollY={scrollY} />
+
+        <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            >
+
+            {pies.map((pie) => (
+
+                <PiePage
+                key={pie.id}
+                pie={pie}
+                />
+
+            ))}
+
+            </ScrollView>
 
         </SafeAreaView>
     );

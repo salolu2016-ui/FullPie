@@ -13,15 +13,14 @@ const Colors = {
 
   // Fondo principal de la aplicación
   background: '#F3D6F6',
-  //background: 'lime',
 
   // Color principal (uva)
-  primary: '#7c3290',
+  primary: '#7C3290',
 
   // Color secundario
   secondary: '#B66CC8',
 
-  //Color cereza
+  // Color cereza
   tertiary: '#750808',
 
   // Fondo de tarjetas
@@ -37,10 +36,18 @@ const Colors = {
   white: '#FFFFFF',
 
   // Masa de pie
-  pieCrust: '#d333ff',
+  pieCrust: '#D333FF',
 
   // Íconos inactivos de los tabs
-  pieCrustLight: '#b88ac0',
+  pieCrustLight: '#B88AC0',
+
+  // ======================================================
+  // Colores de los botones
+  // ======================================================
+
+  button: '#6E3280',
+
+  buttonText: '#F7B4C8',
 
 };
 
