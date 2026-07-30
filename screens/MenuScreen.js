@@ -52,14 +52,14 @@ export default function MenuScreen() {
             showsHorizontalScrollIndicator={false}
             >
 
-            {pies.map((pie) => (
-
-                <PiePage
-                key={pie.id}
-                pie={pie}
-                />
-
-            ))}
+          {pies.map((pie, index) => (
+            <PiePage
+              key={pie.id}
+              pie={pie}
+              index={index}
+              total={pies.length}
+            />
+          ))}
 
             </ScrollView>
 

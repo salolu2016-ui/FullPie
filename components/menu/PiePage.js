@@ -26,7 +26,11 @@ import Colors from '../../theme/colors';
 /**
  * Página individual del catálogo.
  */
-export default function PiePage({ pie }) {
+export default function PiePage({
+  pie,
+  index,
+  total,
+}) {
 
     const { width } = useWindowDimensions();
 
@@ -87,28 +91,52 @@ export default function PiePage({ pie }) {
 {/* ======================================================
     Card 3: Muestra ingredientes y descripción del pie.
     ====================================================== */}
-<View style={styles.infoCard}>
+{/* ======================================================
+    Contenedor de la Card de información.
+    ====================================================== */}
+<View style={styles.infoContainer}>
 
-  <Text style={styles.sectionTitle}>
-    Ingredientes:
-  </Text>
-
-  {pie.ingredientes.map((ingrediente, index) => (
-    <Text
-      key={index}
-      style={styles.ingredient}
-    >
-      • {ingrediente}
+  {/* Flecha izquierda */}
+  {index > 0 && (
+    <Text style={styles.leftArrow}>
+      ‹
     </Text>
-  ))}
+  )}
 
-  <Text style={styles.sectionTitle}>
-    Descripción:
-  </Text>
+  {/* Flecha derecha */}
+  {index < total - 1 && (
+    <Text style={styles.rightArrow}>
+      ›
+    </Text>
+)}
 
-  <Text style={styles.description}>
-    {pie.descripcion}
-  </Text>
+  {/* ======================================================
+      Card 3: Muestra ingredientes y descripción del pie.
+      ====================================================== */}
+  <View style={styles.infoCard}>
+
+    <Text style={styles.sectionTitle}>
+      Ingredientes
+    </Text>
+
+    {pie.ingredientes.map((ingrediente, index) => (
+      <Text
+        key={index}
+        style={styles.ingredient}
+      >
+        • {ingrediente}
+      </Text>
+    ))}
+
+    <Text style={styles.sectionTitle}>
+      Descripción
+    </Text>
+
+    <Text style={styles.description}>
+      {pie.descripcion}
+    </Text>
+
+  </View>
 
 </View>
 
@@ -218,15 +246,16 @@ buyButtonText: {
   fontWeight: 'bold',
   textAlign: 'center',
 },
-/* ======================================================
+
+  /* ======================================================
    Estilos de la Card de información.
    ====================================================== */
 infoCard: {
-  width: '92%',
-  marginTop: 15,
-  backgroundColor: 'rgba(248, 248, 248, 0.88)',
+  width: '100%',
+  backgroundColor: 'rgba(255, 248, 255, 0.88)',
   borderRadius: 20,
-  padding: 15,
+  paddingVertical: 15,
+  paddingHorizontal: 35,
   elevation: 4,
 },
 
@@ -248,6 +277,43 @@ description: {
   fontSize: 14,
   color: Colors.text,
   lineHeight: 18,
+},
+
+/* ======================================================
+   Contenedor de la Card de información.
+   ====================================================== */
+infoContainer: {
+  width: '92%',
+  position: 'relative',
+  marginTop: 15,
+},
+
+/* ======================================================
+   Flecha izquierda.
+   ====================================================== */
+leftArrow: {
+  position: 'absolute',
+  left: 8,
+  top: '2%',
+  fontSize: 34,
+  color: Colors.primary,
+  fontWeight: 'bold',
+  zIndex: 10,
+  opacity: 0.55,
+},
+
+/* ======================================================
+   Flecha derecha.
+   ====================================================== */
+rightArrow: {
+  position: 'absolute',
+  right: 8,
+  top: '2%',
+  fontSize: 34,
+  color: Colors.primary,
+  fontWeight: 'bold',
+  zIndex: 10,
+  opacity: 0.55,
 },
 
 });
