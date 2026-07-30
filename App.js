@@ -34,7 +34,7 @@ import {
   Nunito_700Bold,
 } from '@expo-google-fonts/nunito';
 
-import BottomTabs from './navigation/BottomTabs';
+import AppNavigator from './navigation/AppNavigator';
 
 //import * as NavigationBar from 'expo-navigation-bar';
 
@@ -59,6 +59,6 @@ export default function App() {
     return null;
   }
 
-  return <BottomTabs />;
+  return <AppNavigator />;
 
 }

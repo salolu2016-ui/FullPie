@@ -94,6 +94,8 @@ export default function HomeScreen() {
         <Text style={styles.note}>
             Visita la pestaña "Menú de Pies" para conocer cada
             producto y realizar tu pedido.
+
+            Nuestros pies rinden para 8️⃣ porciones.
         </Text>
 
         </Animated.ScrollView>

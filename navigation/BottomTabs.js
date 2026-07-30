@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+//import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -30,7 +30,7 @@ const Tab = createBottomTabNavigator();
  */
 export default function BottomTabs() {
   return (
-    <NavigationContainer>
+    
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
@@ -86,6 +86,6 @@ export default function BottomTabs() {
           component={MenuScreen}
         />
       </Tab.Navigator>
-    </NavigationContainer>
+    
   );
 }
