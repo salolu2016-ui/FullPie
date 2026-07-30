@@ -23,6 +23,8 @@ import {
 
 import Colors from '../../theme/colors';
 
+import { useNavigation } from '@react-navigation/native';
+
 /**
  * Página individual del catálogo.
  */
@@ -33,6 +35,8 @@ export default function PiePage({
 }) {
 
     const { width } = useWindowDimensions();
+
+    const navigation = useNavigation();
 
   return (
 
@@ -79,7 +83,14 @@ export default function PiePage({
     {/* ======================================================
         Botón para iniciar el proceso de compra del pie.
     ====================================================== */}
-     <TouchableOpacity style={styles.buyButton}>
+     <TouchableOpacity
+        style={styles.buyButton}
+        onPress={() =>
+            navigation.navigate('Purchase', {
+                pie,
+            })
+        }
+    >
         <Text style={styles.buyButtonText}>
             Comprar
         </Text>
