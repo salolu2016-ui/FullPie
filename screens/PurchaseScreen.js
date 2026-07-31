@@ -27,6 +27,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import Colors from '../theme/colors';
 import { saveOrder } from '../services/orderService';
+import SuccessModal from '../components/common/SuccessModal';
 
 export default function PurchaseScreen({ route }) {
 
@@ -37,6 +38,8 @@ export default function PurchaseScreen({ route }) {
     const [nombre, setNombre] = useState('');
     const [telefono, setTelefono] = useState('');
     const [cantidad, setCantidad] = useState(1);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [guardando, setGuardando] = useState(false);
 
     const precio = useMemo(() => {
 
@@ -82,6 +85,8 @@ const confirmarCompra = async () => {
 
     try {
 
+        setGuardando(true);
+
         await saveOrder({
 
             nombre,
@@ -93,20 +98,7 @@ const confirmarCompra = async () => {
 
         });
 
-        Alert.alert(
-
-            'Compra realizada',
-
-            'Su pedido fue registrado correctamente.\n\n¡Gracias por comprar en FullPie! 🥧',
-
-            [
-                {
-                    text: 'Aceptar',
-                    onPress: () => navigation.goBack(),
-                },
-            ]
-
-        );
+        setShowSuccessModal(true);
 
     } catch (error) {
 
@@ -117,6 +109,10 @@ const confirmarCompra = async () => {
             'No fue posible registrar el pedido.\nInténtelo nuevamente.'
 
         );
+
+    } finally {
+
+        setGuardando(false);
 
     }
 
@@ -301,10 +297,11 @@ const confirmarCompra = async () => {
                             <TouchableOpacity
                                 style={styles.confirmButton}
                                 onPress={confirmarCompra}
+                                disabled={guardando}
                             >
 
                                 <Text style={styles.confirmButtonText}>
-                                    Confirmar
+                                    {guardando ? 'Procesando...' : 'Confirmar'}
                                 </Text>
 
                             </TouchableOpacity>
@@ -316,6 +313,18 @@ const confirmarCompra = async () => {
                 </View>
 
             </View>
+
+            <SuccessModal
+                visible={showSuccessModal}
+                nombre={nombre}
+                pie={pie.nombre}
+                cantidad={cantidad}
+                subtotal={subtotal}
+                onClose={() => {
+                    setShowSuccessModal(false);
+                    navigation.goBack();
+                }}
+            />
 
         </SafeAreaView>
 
@@ -348,8 +357,8 @@ const styles = StyleSheet.create({
         maxHeight: '88%',
         backgroundColor: '#FFF8FC',
         borderRadius: 30,
-        padding: 20,
-        elevation: 10,
+        padding: 22,
+        //elevation: 10,
     },
 
     /* ======================================================
