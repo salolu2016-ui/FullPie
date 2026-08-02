@@ -25,6 +25,8 @@ import Colors from '../../theme/colors';
 
 import { useNavigation } from '@react-navigation/native';
 
+import PiePageLandscape from './PiePageLandscape';
+
 /**
  * Página individual del catálogo.
  */
@@ -34,28 +36,60 @@ export default function PiePage({
   total,
 }) {
 
-    const { width } = useWindowDimensions();
+    const { width, height } = useWindowDimensions();
+
+    const isLandscape = width > height;
 
     const navigation = useNavigation();
 
+    if (isLandscape) {
+  return (
+    <PiePageLandscape
+      pie={pie}
+      index={index}
+      total={total}
+    />
+  );
+}
+
+    //Responsivo para tabletas
+    const isTablet = width >= 768;
+
   return (
 
-    <View
-  style={[
-    styles.container,
-    { width },
-  ]}
->
+   <View
+      style={[
+        styles.container,
+        {
+          width: isLandscape ? width * 0.98 : width,
+        },
+      ]}
+    >
 
-  <View style={styles.topSection}>
+<View
+    style={[
+        styles.topSection,
+        isLandscape && styles.topSectionLandscape,
+    ]}
+>
 
     
 
-    <View style={styles.photoCard}>
+    <View
+      style={[
+        styles.photoCard,
+        isLandscape && styles.photoCardLandscape,
+        isTablet && styles.photoCardTablet,
+      ]}
+    >
+    
 
       <Image
         source={pie.imagen}
-        style={styles.image}
+        style={[
+        styles.image,
+        isLandscape && styles.imageLandscape,
+      ]}
         resizeMode="cover"
       />
 
@@ -70,7 +104,12 @@ export default function PiePage({
         Card 2: Muestra el precio del pie y el botón Comprar.
         ====================================================== */}
 
-   <View style={styles.priceCard}>
+   <View
+      style={[
+        styles.priceCard,
+        isLandscape && styles.priceCardLandscape,
+      ]}
+    >
 
     <Text style={styles.priceLabel}>
         Precio
@@ -99,13 +138,18 @@ export default function PiePage({
     </View>
 
   </View>
-{/* ======================================================
-    Card 3: Muestra ingredientes y descripción del pie.
-    ====================================================== */}
-{/* ======================================================
-    Contenedor de la Card de información.
-    ====================================================== */}
-<View style={styles.infoContainer}>
+  {/* ======================================================
+      Card 3: Muestra ingredientes y descripción del pie.
+      ====================================================== */}
+  {/* ======================================================
+      Contenedor de la Card de información.
+      ====================================================== */}
+    <View
+        style={[
+            styles.infoContainer,
+            isLandscape && styles.infoLandscape,
+        ]}
+    >
 
   {/* Flecha izquierda */}
   {index > 0 && (
@@ -162,10 +206,11 @@ const styles = StyleSheet.create({
  /* ======================================================
    Contenedor principal de la página del pie.
    ====================================================== */
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: -20,
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      paddingTop: 8,
+      paddingBottom: 16,
   },
 
   title: {
@@ -176,7 +221,7 @@ const styles = StyleSheet.create({
 
   image: {
   width: '100%',
-  height: 150,
+  height: 145,
   borderRadius: 16,
   //marginTop: 10,
  },
@@ -325,6 +370,40 @@ rightArrow: {
   fontWeight: 'bold',
   zIndex: 10,
   opacity: 0.55,
+},
+
+  /* ======================================================
+    Landscape.
+    ====================================================== */
+
+  topSectionLandscape: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'flex-start',
+},
+
+  infoLandscape: {
+
+      width: '96%',
+      marginTop: 10,
+
+  },
+
+  photoCardLandscape: {
+  width: '60%',
+},
+
+priceCardLandscape: {
+  width: '36%',
+},
+
+imageLandscape: {
+  height: 110,
+},
+
+photoCardTablet: {
+  width: '65%',
+  maxWidth: 500,
 },
 
 });

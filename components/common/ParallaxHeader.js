@@ -61,10 +61,11 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#F3D6F6',
     overflow: 'hidden',
-    },
+    paddingBottom: 8,
+},
 
     banner: {
     width: '100%',
-    height: 180,
+    height: 129,
     },
 });

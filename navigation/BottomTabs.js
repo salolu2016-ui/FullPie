@@ -20,6 +20,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/MenuScreen';
 import Colors from '../theme/colors';
+import { useWindowDimensions } from 'react-native';
 
 // Crea el navegador de pestañas.
 const Tab = createBottomTabNavigator();
@@ -29,35 +30,44 @@ const Tab = createBottomTabNavigator();
  * de la aplicación.
  */
 export default function BottomTabs() {
+  const { width, height } = useWindowDimensions();
+  const isLandscape = width > height;
+
   return (
     
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
-          tabBarStyle: {
-            backgroundColor: Colors.tertiary,
-            borderTopWidth: 0,
-            elevation: 10,
-            
-            shadowColor: '#000',
-            shadowOpacity: 0.15,
-            height: 125,
-            paddingBottom: 6,
-            paddingTop: 6,
-            },
+
+      tabBarStyle: {
+    backgroundColor: Colors.tertiary,
+    borderTopWidth: 0,
+    elevation: 10,
+
+    shadowColor: '#000',
+    shadowOpacity: 0.15,
+
+    height: isLandscape ? 68 : 112,
+    paddingTop: isLandscape ? 2 : 6,
+    paddingBottom: isLandscape ? 2 : 6,
+},
 
             tabBarActiveTintColor: '#ff8787',
 
             tabBarInactiveTintColor: Colors.pieCrustLight,
 
-            tabBarLabelStyle: {
-            fontSize: 12,
-            fontWeight: '600',
-            //marginBottom: 2,
-            },
+            tabBarIconStyle: {
+              marginTop: 2,
+          },
+
+    tabBarLabelStyle: {
+    fontSize: isLandscape ? 9 : 11,
+    fontWeight: '600',
+    marginBottom: isLandscape ? 2 : 4,
+},
 
           // Configuración de los íconos de cada pestaña.
-          tabBarIcon: ({ color, size }) => {
+          tabBarIcon: ({ color }) => {
             let iconName;
 
             if (route.name === 'Inicio') {
@@ -69,7 +79,7 @@ export default function BottomTabs() {
             return (
               <Ionicons
                 name={iconName}
-                size={size}
+                size={isLandscape ? 20 : 24}
                 color={color}
               />
             );

@@ -29,6 +29,7 @@ import ParallaxHeader from '../components/common/ParallaxHeader';
 import PiePage from '../components/menu/PiePage';
 import Colors from '../theme/colors';
 import pies from '../data/pies';
+import { useWindowDimensions } from 'react-native';
 
     /**
  * Pantalla que muestra el catálogo de pies.
@@ -36,6 +37,9 @@ import pies from '../data/pies';
 export default function MenuScreen() {
 
     const scrollY = React.useRef(new Animated.Value(0)).current;
+
+    const { width, height } = useWindowDimensions();
+    const isLandscape = width > height;
 
     return (
         <SafeAreaView
@@ -46,11 +50,13 @@ export default function MenuScreen() {
         {/* Banner principal */}
         <ParallaxHeader scrollY={scrollY} />
 
-        <ScrollView
+       <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={{ flexGrow: 1 }}
             horizontal
-            pagingEnabled
+            pagingEnabled={!isLandscape}
             showsHorizontalScrollIndicator={false}
-            >
+        >
 
           {pies.map((pie, index) => (
             <PiePage
